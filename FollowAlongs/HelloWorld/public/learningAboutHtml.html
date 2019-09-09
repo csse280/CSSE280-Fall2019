@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Hello World</title>
+    <style>
+        span {
+            display: block;
+        }
+
+        p {
+            color: red;
+        }
+
+        div {
+            border: 5px solid blue;
+            border-width: 2px;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        Div is the most common HTML tag
+        </div>
+        <div>
+            A div gets the whole line the display property is block
+        </div>
+        <br>
+        <span>
+            Span is probably the next most popular.
+        </span>
+        <span>
+            Spans are on the same line because display = inline by default.
+        </span>
+        <p>
+            But with CSS you can do anything!
+        </p>
+<button id="my-button">Press me</button>
+
+</body>
+<script>
+    console.log("Hello World in the console");
+
+    document.getElementById("my-button").addEventListener("click", function() {
+        console.log("You clicked the button!");
+        alert("JavaScript without jQuery still works");
+    });
+
+
+
+</script>
+
+</html>
