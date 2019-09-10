@@ -1,0 +1,20 @@
+body {
+    background:lightgray;
+}
+
+#my-text {
+    font-size: 2em;
+    color: #800000;
+    text-align: center;
+    margin: 50px;
+    font-weight: 200;
+    border: 1px solid black;
+    padding: 50px;
+    background: #fffa;
+}
+
+.small-width {
+    width: 200px;
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
