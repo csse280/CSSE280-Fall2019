@@ -10,3 +10,12 @@ body {
 .page-container {
     margin-top: 50px;
 }
+
+.btn {
+    background-color: #800000;
+    color: white;
+}
+
+.btn:hover {
+    color: lightgray;
+}
