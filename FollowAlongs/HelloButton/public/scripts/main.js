@@ -2,7 +2,7 @@
  * @fileoverview
  * Provides interactions for all pages in the UI.
  *
- * @author 
+ * @author David Fisher
  */
 
 /** namespace. */
@@ -14,16 +14,6 @@ rh.variableName = "";
 /** function and class syntax examples */
 rh.functionName = function () {
 	/** function body */
-};
-
-rh.ClassName = class {
-	/** constructor */
-	constructor() {
-
-	}
-	methodName() {
-
-	}
 };
 
 /* Main */
