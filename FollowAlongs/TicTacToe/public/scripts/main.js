@@ -2,31 +2,45 @@
  * @fileoverview
  * Provides interactions for all pages in the UI.
  *
- * @author 
+ * @author David Fisher
  */
 
 /** namespace. */
 var rh = rh || {};
 
 /** globals */
-rh.variableName = "";
 
-/** function and class syntax examples */
-rh.functionName = function () {
-	/** function body */
-};
 
-rh.ClassName = class {
-	/** constructor */
+rh.Game = class {
 	constructor() {
+		this.board = [];  // Array of 9 marks "X" "O" or " "
+		this.state = ""; // Enums object X_TURN, O_TURN, X_WIN, O_WIN, TIE_GAME
 
 	}
-	methodName() {
+	pressedButtonAtIndex(buttonIndex) {
+		// Controller is telling the Model to make a change
+
+	}
+	getMarkAtIndex(buttonIndex) {
+		// Returns "X", "O", or " " for this square.
+	}
+	getState() {
+		// Returns a string for the game state.
+	}
+}
+
+rh.PageController = class {
+	constructor() {
+		this.game = new rh.Game();
+	}
+	updateView() {
+		// Use the Game Model object to update the View
 
 	}
 }
 
 /* Main */
 $(document).ready(() => {
-    console.log("Ready");
+	console.log("Ready");
+	new PageController();
 });
