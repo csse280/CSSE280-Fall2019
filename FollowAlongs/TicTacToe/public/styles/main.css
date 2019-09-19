@@ -33,6 +33,30 @@ body {
     font-weight: 500;
 }
 
+@media (min-width: 576px) { 
+    #game-board {
+        width: 450px;
+        height: 450px;
+    }    
+    .square {
+        font-size: 6em;
+        line-height: 150px;
+    }
+ }
+
+@media (min-width: 768px) { 
+    #game-board {
+        width: 600px;
+        height: 600px;
+    }    
+    .square {
+        font-size: 8em;
+        line-height: 200px;
+    }
+ }
+
+
+
 .borderleft {
     border-left: 4px solid #000;
 }
