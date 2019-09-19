@@ -15,6 +15,15 @@ body {
     text-align: center;
 }
 
+#game-board {
+    margin-top: 40px;
+    display: grid;
+    width: 300px;
+    height: 300px;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 33% 33% 33%;
+}
+
 .square {
     font-size: 4em;
     line-height: 100px;
@@ -43,4 +52,5 @@ body {
 #new-game-button {
     margin-top: 15px;
     background: #800000;
+    grid-column: span 3;
 }
