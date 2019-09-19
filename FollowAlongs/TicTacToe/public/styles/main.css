@@ -8,5 +8,39 @@ body {
 }
 
 .page-container {
-    margin-top: 50px;
+    margin-top: 80px;
+}
+
+#game-state-text {
+    text-align: center;
+}
+
+.square {
+    font-size: 4em;
+    line-height: 100px;
+    background: #80000080;
+    color: white;
+    text-align: center;
+    font-weight: 500;
+}
+
+.borderleft {
+    border-left: 4px solid #000;
+}
+
+.borderright {
+    border-right: 4px solid #000;
+}
+
+.bordertop {
+    border-top: 4px solid #000;
+}
+
+.borderbottom {
+    border-bottom: 4px solid #000;
+}
+
+#new-game-button {
+    margin-top: 15px;
+    background: #800000;
 }
