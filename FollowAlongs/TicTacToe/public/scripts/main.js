@@ -71,18 +71,17 @@ rh.PageController = class {
 		// console.log('this.game.board :', this.game.board);
 		// console.log('this.game.state :', this.game.state);
 
+		const that = this;
 		$(".square").click(function() {
 			// const buttonId = this.id.substring(6);
 			const buttonId = $(this).data("id");
-			console.log(buttonId);
-
+			that.game.pressedButtonAtIndex(buttonId);
+			that.updateView();
 		});
-
-
-		
 	}
 	updateView() {
 		// Use the Game Model object to update the View
+		
 
 	}
 }
