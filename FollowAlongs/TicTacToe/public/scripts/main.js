@@ -41,6 +41,7 @@ rh.Game = class {
 
 		// Quick hack to be replaced later.
 		this.board[buttonIndex] = rh.Game.Mark.X;
+		this.state = rh.Game.State.X_WIN;
 
 	}
 
@@ -79,10 +80,13 @@ rh.PageController = class {
 			that.updateView();
 		});
 	}
+
 	updateView() {
 		// Use the Game Model object to update the View
-		
-
+		$("#game-state-text").html(this.game.state);
+		$(".square").each((index, item) => {
+			$(item).html(this.game.getMarkAtIndex(index));
+		});
 	}
 }
 
