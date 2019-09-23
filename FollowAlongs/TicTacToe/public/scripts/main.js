@@ -79,6 +79,11 @@ rh.PageController = class {
 			that.game.pressedButtonAtIndex(buttonId);
 			that.updateView();
 		});
+		$("#new-game-button").click(() => {
+			this.game = new rh.Game();
+			this.updateView();
+		});
+		this.updateView();
 	}
 
 	updateView() {
