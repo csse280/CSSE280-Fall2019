@@ -39,9 +39,6 @@ rh.Game = class {
 	pressedButtonAtIndex(buttonIndex) {
 		// Controller is telling the Model to make a change
 
-		// Quick hack to be replaced later.
-		this.board[buttonIndex] = rh.Game.Mark.X;
-		this.state = rh.Game.State.X_WIN;
 
 	}
 
@@ -72,12 +69,11 @@ rh.PageController = class {
 		// console.log('this.game.board :', this.game.board);
 		// console.log('this.game.state :', this.game.state);
 
-		const that = this;
-		$(".square").click(function() {
+		$(".square").click((event) => {
 			// const buttonId = this.id.substring(6);
-			const buttonId = $(this).data("id");
-			that.game.pressedButtonAtIndex(buttonId);
-			that.updateView();
+			const buttonId = $(event.target).data("id");
+			this.game.pressedButtonAtIndex(buttonId);
+			this.updateView();
 		});
 		$("#new-game-button").click(() => {
 			this.game = new rh.Game();
