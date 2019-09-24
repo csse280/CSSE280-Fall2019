@@ -38,8 +38,44 @@ rh.Game = class {
 
 	pressedButtonAtIndex(buttonIndex) {
 		// Controller is telling the Model to make a change
+		if (this.state == rh.Game.State.X_WIN || this.state == rh.Game.State.O_WIN ||
+			this.state == rh.Game.State.TIE) {
+			return;  // Do nothing since the game has already been won.
+		}
+		if (this.board[buttonIndex] != rh.Game.Mark.NONE) {
+			return;  // Square is not empty
+		}
+		if (this.state == rh.Game.State.X_TURN) {
+			// If X_TURN, make a mark for X and
+			// Change the game state to O_TURN and vice versa
+			this.board[buttonIndex] = rh.Game.Mark.X;
+			this.state = rh.Game.State.O_TURN;
+		} else if (this.state == rh.Game.State.O_TURN) {
+			this.board[buttonIndex] = rh.Game.Mark.O;
+			this.state = rh.Game.State.X_TURN;
+		}
+		// Check for a tie
+		if (this.board.indexOf(rh.Game.Mark.NONE) == -1) {
+			this.state = rh.Game.State.TIE;
+		}
+		// Check for a win
+		const linesOf3 = []; // Holds the 8 three letter words.
+		linesOf3.push(this.board[0] + this.board[1] + this.board[2]);
+		linesOf3.push(this.board[3] + this.board[4] + this.board[5]);
+		linesOf3.push(this.board[6] + this.board[7] + this.board[8]);
+		linesOf3.push(this.board[0] + this.board[3] + this.board[6]);
+		linesOf3.push(this.board[1] + this.board[4] + this.board[7]);
+		linesOf3.push(this.board[2] + this.board[5] + this.board[8]);
+		linesOf3.push(this.board[0] + this.board[4] + this.board[8]);
+		linesOf3.push(this.board[2] + this.board[4] + this.board[6]);
 
-
+		for (const line of linesOf3) {
+			if (line == "XXX") {
+				this.state = rh.Game.State.X_WIN;
+			} else if (line == "OOO") {
+				this.state = rh.Game.State.O_WIN;
+			}
+		}
 	}
 
 	getMarkAtIndex(buttonIndex) {
