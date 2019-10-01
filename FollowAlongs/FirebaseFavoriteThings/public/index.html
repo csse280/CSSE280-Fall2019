@@ -14,8 +14,23 @@
     Firebase Favorite Things
   </nav>
   <div id="main-page" class="container page-container">
-
-
+    <div class="jumbotron">
+      <h1 class="display-5">Single Object</h1>
+      <div class="form-group">
+        <label for="colorInput">Favorite Color</label>
+        <input type="text" class="form-control" id="colorInput" aria-describedby="color input"
+          placeholder="Enter color">
+      </div>
+      <div class="form-group">
+        <label for="numberInput">Favorite Number</label>
+        <input type="number" class="form-control" id="numberInput" placeholder="Enter a number">
+      </div>
+      <div class="form-group form-check">
+        <input type="checkbox" class="form-check-input" id="isTabsInput">
+        <label class="form-check-label" for="isTabsInput">Check the box if you prefer tabs</label>
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
   </div>
   <script src="scripts/jquery.min.js"></script>
   <script src="scripts/popper.min.js"></script>
