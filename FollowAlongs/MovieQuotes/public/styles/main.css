@@ -10,3 +10,15 @@ body {
 .page-container {
     margin-top: 50px;
 }
+
+#fab {
+    position: absolute;
+    bottom: 4px;
+    right: 0px;
+    z-index: 999;
+}
+
+#fab:active {
+    transform: translateY(4px);
+    opacity: 0.8;
+}
