@@ -10,6 +10,7 @@ var rh = rh || {};
 
 /** globals */
 rh.docRef = null;
+rh.docExists = false;
 rh.FB_KEY_COLOR = "color";
 rh.FB_KEY_NUMBER = "number";
 rh.FB_KEY_IS_TABS = "isTabs";
@@ -18,6 +19,7 @@ rh.FB_KEY_IS_TABS = "isTabs";
 /** function and class syntax examples */
 rh.beginListening = function () {
 	rh.docRef.onSnapshot(function(doc) {
+		rh.docExists = doc.exists;
 		if (doc.exists) {
 			console.log("Document data:", doc.data());
 			const color = doc.get(rh.FB_KEY_COLOR);
@@ -45,17 +47,32 @@ rh.beginListening = function () {
 rh.enableForm = function() {
 	$("#submitFavorites").click((event) => {
 		const color = $("#colorInput").val();
-		const number = $("#numberInput").val();
+		let number = $("#numberInput").val();
 		if ($.isNumeric(number)) {
-			
+			number = parseInt(number);
+		} else {
+			number = 0;
 		}
-		const isTabs = $("#isTabsInput").val();
+		const isTabs = $("#isTabsInput").prop("checked");
 
 		console.log("Sending: ", color, typeof(color));
 		console.log("Sending: ", number, typeof(number));
 		console.log("Sending: ", isTabs, typeof(isTabs));
 
-		
+		rh.docRef.set({
+			[rh.FB_KEY_COLOR]: color,
+			[rh.FB_KEY_NUMBER]: number,
+			[rh.FB_KEY_IS_TABS]: isTabs
+		});
+	});
+	$("#colorInput").keyup((event) => {
+		const color = $(event.target).val();
+		console.log("Typing:", color);
+		if (rh.docExists) {
+			rh.docRef.update({
+				[rh.FB_KEY_COLOR]: color
+			});
+		}
 	});
 }
 
