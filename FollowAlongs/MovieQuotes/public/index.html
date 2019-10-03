@@ -13,13 +13,37 @@
   <nav class="navbar fixed-top">
     Movie Quotes
   </nav>
-  <div id="fab">
+  <div id="fab" data-toggle="modal" data-target="#addQuoteDialog">
     <img src="images/fab.png" alt="fab">
   </div>
   <div id="main-page" class="container page-container">
 
 
   </div>
+
+
+  <!-- Modal -->
+  <div class="modal fade" id="addQuoteDialog" tabindex="-1" role="dialog" aria-labelledby="add quote"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script src="scripts/jquery.min.js"></script>
   <script src="scripts/popper.min.js"></script>
   <script src="scripts/bootstrap.min.js"></script>
