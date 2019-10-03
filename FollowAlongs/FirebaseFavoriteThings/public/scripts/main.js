@@ -17,9 +17,7 @@ rh.FB_KEY_IS_TABS = "isTabs";
 
 /** function and class syntax examples */
 rh.beginListening = function () {
-	
 	rh.docRef.onSnapshot(function(doc) {
-
 		if (doc.exists) {
 			console.log("Document data:", doc.data());
 			const color = doc.get(rh.FB_KEY_COLOR);
@@ -40,17 +38,31 @@ rh.beginListening = function () {
 			$("#favorite-color").html("unknown");
 			$("#favorite-number").html("unknown");
 			$("#favorite-indent").html("unknown");
-		}
-
-        
+		}        
     });
-
 };
+
+rh.enableForm = function() {
+	$("#submitFavorites").click((event) => {
+		const color = $("#colorInput").val();
+		const number = $("#numberInput").val();
+		if ($.isNumeric(number)) {
+			
+		}
+		const isTabs = $("#isTabsInput").val();
+
+		console.log("Sending: ", color, typeof(color));
+		console.log("Sending: ", number, typeof(number));
+		console.log("Sending: ", isTabs, typeof(isTabs));
+
+		
+	});
+}
 
 /* Main */
 $(document).ready(() => {
 	console.log("Ready");
 	rh.docRef = firebase.firestore().collection("FavoriteThings").doc("mine");
 	rh.beginListening();
-
+	rh.enableForm();
 });
