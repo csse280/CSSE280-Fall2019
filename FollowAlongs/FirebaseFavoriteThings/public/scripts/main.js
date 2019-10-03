@@ -74,6 +74,9 @@ rh.enableForm = function() {
 			});
 		}
 	});
+	$("#delete").click((event) => {
+		rh.docRef.delete();
+	})
 }
 
 /* Main */
