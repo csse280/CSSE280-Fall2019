@@ -20,14 +20,27 @@ rh.FbMovieQuotesManager = class {
 	constructor() {
 		this._ref = firebase.firestore().collection(rh.COLLECTION_MOVIEQUOTES);
 		this._documentSnapshots = [];
+		this._unsubscribe = null;
 	}
+
 	beginListening(changeListener) {
 		console.log("Listening for movie quotes");
-
+		this._unsubscribe = this._ref.onSnapshot((querySnapshot) => {
+			this._documentSnapshots = querySnapshot.docs;
+			console.log("Update " + this._documentSnapshots.length + " movie quotes");
+			// querySnapshot.forEach( (doc) => {
+			// 	console.log(doc.data());
+			// });
+			if(changeListener) {
+				changeListener();
+			}
+		});
 	}
+
 	stopListening() {
-
+		this._unsubscribe();
 	}
+	
 	add(quote, movie) {
 
 	}
@@ -41,13 +54,13 @@ rh.FbMovieQuotesManager = class {
 		return this._documentSnapshots.length;
 	}
 	getIdAtIndex(index) {
-		
+
 	}
 	getQuoteAtIndex(index) {
-		
+
 	}
 	getMovieAtIndex(index) {
-		
+
 	}
 }
 
@@ -56,14 +69,14 @@ rh.ListPageController = class {
 		rh.fbMovieQuotesManager.beginListening(this.updateView.bind(this));
 	}
 	updateView() {
-
+		console.log("The model object has changed.  I need to use it!", this);
 	}
 }
 
 /* Main */
 $(document).ready(() => {
 	console.log("Ready");
-	if($("#list-page").length) {
+	if ($("#list-page").length) {
 		console.log("On the list page");
 		rh.fbMovieQuotesManager = new rh.FbMovieQuotesManager();
 		new rh.ListPageController();
