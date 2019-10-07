@@ -22,3 +22,17 @@ body {
     transform: translateY(4px);
     opacity: 0.8;
 }
+
+.btn-outline-light {
+    color: #800000;
+}
+
+.modal-header {
+    border: none;
+    padding-bottom: 0;
+}
+
+.modal-footer {
+    border: none;
+    padding-top: 0;
+}
