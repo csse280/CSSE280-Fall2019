@@ -22,6 +22,7 @@ rh.FbMovieQuotesManager = class {
 		this._documentSnapshots = [];
 	}
 	beginListening(changeListener) {
+		console.log("Listening for movie quotes");
 
 	}
 	stopListening() {
@@ -52,7 +53,7 @@ rh.FbMovieQuotesManager = class {
 
 rh.ListPageController = class {
 	constructor() {
-
+		rh.fbMovieQuotesManager.beginListening(this.updateView.bind(this));
 	}
 	updateView() {
 
@@ -62,9 +63,9 @@ rh.ListPageController = class {
 /* Main */
 $(document).ready(() => {
 	console.log("Ready");
-
-	
-
-
-	rh.fbMovieQuotesManager = new rh.FbMovieQuotesManager();
+	if($("#list-page").length) {
+		console.log("On the list page");
+		rh.fbMovieQuotesManager = new rh.FbMovieQuotesManager();
+		new rh.ListPageController();
+	}
 });
