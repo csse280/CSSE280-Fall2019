@@ -36,3 +36,15 @@ body {
     border: none;
     padding-top: 0;
 }
+
+.quote-card-quote {
+    font-size: 1.5em;
+}
+
+.quote-card-movie {
+    font-size: 1.2em;
+}
+
+.quote-card {
+    margin: 2px;
+}
