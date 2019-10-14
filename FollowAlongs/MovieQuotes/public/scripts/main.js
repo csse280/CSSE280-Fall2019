@@ -62,13 +62,13 @@ rh.FbMovieQuotesManager = class {
 		return this._documentSnapshots.length;
 	}
 	getIdAtIndex(index) {
-
+		return this._documentSnapshots[index].id;
 	}
 	getQuoteAtIndex(index) {
-
+		return this._documentSnapshots[index].get(rh.KEY_QUOTE);
 	}
 	getMovieAtIndex(index) {
-
+		return this._documentSnapshots[index].get(rh.KEY_MOVIE);
 	}
 }
 
@@ -92,7 +92,15 @@ rh.ListPageController = class {
 	}
 
 	updateView() {
-		console.log("The model object has changed.  I need to use it!", this);
+		$("#quoteList").removeAttr("id").hide();
+		let $newList = $("<ul></ul>").attr("id", "quoteList").addClass("list-group");
+
+		for (let k = 0; k < rh.fbMovieQuotesManager.length; k++) {
+			const $newCard = null; // TODO: Implement this
+			$newList.append($newCard);
+		}
+		$("#quoteListContainer").append($newList);
+
 		
 	}
 }
