@@ -75,10 +75,10 @@ rh.FbMovieQuotesManager = class {
 rh.ListPageController = class {
 	constructor() {
 		rh.fbMovieQuotesManager.beginListening(this.updateView.bind(this));
-		$("#addQuoteDialog").on("show.bs.modal", function (e) {
-			$("#inputQuote").val("");
-			$("#inputMovie").val("");
-		});
+		// $("#addQuoteDialog").on("show.bs.modal", function (e) {
+		// 	$("#inputQuote").val("");
+		// 	$("#inputMovie").val("");			
+		// });
 		$("#addQuoteDialog").on("shown.bs.modal", function (e) {
 			$("#inputQuote").trigger("focus");
 		});
@@ -86,11 +86,14 @@ rh.ListPageController = class {
 			const quote = $("#inputQuote").val();
 			const movie = $("#inputMovie").val();
 			rh.fbMovieQuotesManager.add(quote, movie);
+			$("#inputQuote").val("");
+			$("#inputMovie").val("");
 		})
 	}
 
 	updateView() {
 		console.log("The model object has changed.  I need to use it!", this);
+		
 	}
 }
 
