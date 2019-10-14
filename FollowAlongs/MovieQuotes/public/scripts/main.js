@@ -125,10 +125,17 @@ rh.ListPageController = class {
 
 	// createQuoteCard(id, quote, movie) {}
 	createQuoteCard(movieQuote) {
-		const $newCard = $("#quoteCardTemplate").clone()
-							.attr("id", movieQuote.id).removeClass("invisible");
-		$newCard.find(".quote-card-quote").text(movieQuote.quote);
-		$newCard.find(".quote-card-movie").text(movieQuote.movie);
+		// const $newCard = $("#quoteCardTemplate").clone()
+		// 					.attr("id", movieQuote.id).removeClass("invisible");
+		// $newCard.find(".quote-card-quote").text(movieQuote.quote);
+		// $newCard.find(".quote-card-movie").text(movieQuote.movie);
+
+		const $newCard = $(`
+		  <li id="${movieQuote.id}" class="quote-card list-group-item">
+		     <div class="quote-card-quote">${movieQuote.quote}</div>
+		     <div class="quote-card-movie text-right blockquote-footer">${movieQuote.movie}</div>
+	      </li>`);
+
 		$newCard.click((event) => {
 			console.log("You have clicked", movieQuote);
 			// TODO: Change the page.
