@@ -31,7 +31,7 @@ rh.FbMovieQuotesManager = class {
 			// querySnapshot.forEach( (doc) => {
 			// 	console.log(doc.data());
 			// });
-			if(changeListener) {
+			if (changeListener) {
 				changeListener();
 			}
 		});
@@ -75,16 +75,20 @@ rh.FbMovieQuotesManager = class {
 rh.ListPageController = class {
 	constructor() {
 		rh.fbMovieQuotesManager.beginListening(this.updateView.bind(this));
-
-		// TODO: On Monday improve the form shown stuff.
-
+		$("#addQuoteDialog").on("show.bs.modal", function (e) {
+			$("#inputQuote").val("");
+			$("#inputMovie").val("");
+		});
+		$("#addQuoteDialog").on("shown.bs.modal", function (e) {
+			$("#inputQuote").trigger("focus");
+		});
 		$("#submitAddQuote").click((event) => {
 			const quote = $("#inputQuote").val();
 			const movie = $("#inputMovie").val();
 			rh.fbMovieQuotesManager.add(quote, movie);
 		})
 	}
-	
+
 	updateView() {
 		console.log("The model object has changed.  I need to use it!", this);
 	}
