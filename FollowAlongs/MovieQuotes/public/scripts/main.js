@@ -33,7 +33,7 @@ rh.FbMovieQuotesManager = class {
 
 	beginListening(changeListener) {
 		console.log("Listening for movie quotes");
-		this._unsubscribe = this._ref.onSnapshot((querySnapshot) => {
+		this._unsubscribe = this._ref.orderBy(rh.KEY_LAST_TOUCHED, "desc").limit(30).onSnapshot((querySnapshot) => {
 			this._documentSnapshots = querySnapshot.docs;
 			console.log("Update " + this._documentSnapshots.length + " movie quotes");
 			// querySnapshot.forEach( (doc) => {
@@ -135,7 +135,6 @@ rh.ListPageController = class {
 		     <div class="quote-card-quote">${movieQuote.quote}</div>
 		     <div class="quote-card-movie text-right blockquote-footer">${movieQuote.movie}</div>
 	      </li>`);
-
 		$newCard.click((event) => {
 			console.log("You have clicked", movieQuote);
 			// TODO: Change the page.
