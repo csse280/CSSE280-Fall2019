@@ -20,7 +20,7 @@
       </span>
       <div class="dropdown-menu dropdown-menu-right">
         <button class="dropdown-item" type="button" data-target="#editQuoteDialog" data-toggle="modal">Edit</button>
-        <button class="dropdown-item" type="button">Delete</button>
+        <button class="dropdown-item" type="button" data-target="#deleteQuoteDialog" data-toggle="modal">Delete</button>
       </div>
     </div>
 
@@ -56,6 +56,25 @@
         <div class="modal-footer">
           <button type="button" class="btn btn-outline-light" data-dismiss="modal">CANCEL</button>
           <button type="button" id="submitEditQuote" class="btn btn-outline-light" data-dismiss="modal">SAVE</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="deleteQuoteDialog" tabindex="-1" role="dialog" aria-labelledby="delete quote"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Warning</h5>
+        </div>
+        <div class="modal-body">
+          Are you sure you would like to delete this quote?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-light" data-dismiss="modal">CANCEL</button>
+          <button type="button" id="deleteQuote" class="btn btn-outline-light" data-dismiss="modal">DELETE</button>
         </div>
       </div>
     </div>
