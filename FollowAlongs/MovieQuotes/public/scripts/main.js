@@ -60,12 +60,6 @@ rh.FbMovieQuotesManager = class {
 			console.log("There was an error adding the document", error);
 		});
 	}
-	update(id, quote, movie) {
-
-	}
-	delete(id) {
-
-	}
 	get length() {
 		return this._documentSnapshots.length;
 	}
@@ -157,6 +151,70 @@ rh.storage.getMovieQuoteId = function() {
 		console.log("Missing the Movie Quote ID!!!!!");
 	}
 	return movieQuoteId;
+}
+
+rh.FbSingleMovieQuoteManager = class {
+	constructor(movieQuoteId) {
+		this._ref = firebase.firestore().collection(rh.COLLECTION_MOVIEQUOTES).doc(movieQuoteId);
+		this._document = {};
+		this._unsubscribe = null;
+	}
+
+	beginListening(changeListener) {
+		// console.log("Listening for movie quotes");
+		// this._unsubscribe = this._ref.orderBy(rh.KEY_LAST_TOUCHED, "desc").limit(30).onSnapshot((querySnapshot) => {
+		// 	this._documentSnapshots = querySnapshot.docs;
+		// 	console.log("Update " + this._documentSnapshots.length + " movie quotes");
+		// 	// querySnapshot.forEach( (doc) => {
+		// 	// 	console.log(doc.data());
+		// 	// });
+		// 	if (changeListener) {
+		// 		changeListener();
+		// 	}
+		// });
+	}
+
+	stopListening() {
+		this._unsubscribe();
+	}
+
+	update(quote, movie) {
+
+	}
+	delete() {
+
+	}
+
+	get quote() {
+
+	}
+	get movie() {
+
+	}
+}
+
+rh.DetailPageController = class {
+	constructor() {
+		// rh.fbMovieQuotesManager.beginListening(this.updateView.bind(this));
+		// // $("#addQuoteDialog").on("show.bs.modal", function (e) {
+		// // 	$("#inputQuote").val("");
+		// // 	$("#inputMovie").val("");			
+		// // });
+		// $("#addQuoteDialog").on("shown.bs.modal", function (e) {
+		// 	$("#inputQuote").trigger("focus");
+		// });
+		// $("#submitAddQuote").click((event) => {
+		// 	const quote = $("#inputQuote").val();
+		// 	const movie = $("#inputMovie").val();
+		// 	rh.fbMovieQuotesManager.add(quote, movie);
+		// 	$("#inputQuote").val("");
+		// 	$("#inputMovie").val("");
+		// })
+	}
+
+	updateView() {
+
+	}
 }
 
 /* Main */
