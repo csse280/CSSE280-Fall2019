@@ -166,5 +166,10 @@ $(document).ready(() => {
 		console.log("On the list page");
 		rh.fbMovieQuotesManager = new rh.FbMovieQuotesManager();
 		new rh.ListPageController();
+	} else if ($("#detail-page").length) {
+		console.log("On the detail page");
+		
 	}
+	
+
 });
