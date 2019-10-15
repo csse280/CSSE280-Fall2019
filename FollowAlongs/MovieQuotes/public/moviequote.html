@@ -5,6 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="stylesheet" href="styles/bootstrap.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   <link rel="stylesheet" href="styles/main.css">
   <title>Movie Quote</title>
 </head>
@@ -12,6 +13,17 @@
 <body>
   <nav class="navbar fixed-top">
     Movie Quote
+
+    <div class="btn-group">
+      <span data-toggle="dropdown">
+        <i class="material-icons">menu</i>
+      </span>
+      <div class="dropdown-menu dropdown-menu-right">
+        <button class="dropdown-item" type="button">Edit</button>
+        <button class="dropdown-item" type="button">Delete</button>
+      </div>
+    </div>
+
   </nav>
 
   <div id="detail-page" class="container page-container">

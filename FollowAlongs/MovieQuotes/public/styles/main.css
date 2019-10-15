@@ -54,3 +54,7 @@ body {
 .quote-card {
     margin: 2px;
 }
+
+[data-toggle="dropdown"] {
+    cursor: pointer;
+}
