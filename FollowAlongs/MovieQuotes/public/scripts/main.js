@@ -137,10 +137,26 @@ rh.ListPageController = class {
 	      </li>`);
 		$newCard.click((event) => {
 			console.log("You have clicked", movieQuote);
-			// TODO: Change the page.
+			rh.storage.setMovieQuoteId(movieQuote.id);
+			window.location.href = "/moviequote.html";
 		});
 		return $newCard;
 	}
+}
+
+
+rh.storage = rh.storage || {};
+rh.storage.KEY_MOVIE_QUOTE_ID = "movieQuoteId";
+rh.storage.setMovieQuoteId = function(movieQuoteId) {
+	sessionStorage.setItem(rh.storage.KEY_MOVIE_QUOTE_ID, movieQuoteId);
+}
+
+rh.storage.getMovieQuoteId = function() {
+	const movieQuoteId = sessionStorage.getItem(rh.storage.KEY_MOVIE_QUOTE_ID);
+	if (!movieQuoteId) {
+		console.log("Missing the Movie Quote ID!!!!!");
+	}
+	return movieQuoteId;
 }
 
 /* Main */
