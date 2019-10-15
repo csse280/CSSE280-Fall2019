@@ -19,7 +19,7 @@
         <i class="material-icons">menu</i>
       </span>
       <div class="dropdown-menu dropdown-menu-right">
-        <button class="dropdown-item" type="button">Edit</button>
+        <button class="dropdown-item" type="button" data-target="#editQuoteDialog" data-toggle="modal">Edit</button>
         <button class="dropdown-item" type="button">Delete</button>
       </div>
     </div>
@@ -32,12 +32,12 @@
 
 
   <!-- Modal -->
-  <div class="modal fade" id="addQuoteDialog" tabindex="-1" role="dialog" aria-labelledby="add quote"
+  <div class="modal fade" id="editQuoteDialog" tabindex="-1" role="dialog" aria-labelledby="edit quote"
     aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Add a movie quote</h5>
+          <h5 class="modal-title">Edit this movie quote</h5>
         </div>
         <div class="modal-body">
           <div class="form-group row">
@@ -55,7 +55,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-outline-light" data-dismiss="modal">CANCEL</button>
-          <button type="button" id="submitAddQuote" class="btn btn-outline-light" data-dismiss="modal">CREATE</button>
+          <button type="button" id="submitEditQuote" class="btn btn-outline-light" data-dismiss="modal">SAVE</button>
         </div>
       </div>
     </div>
