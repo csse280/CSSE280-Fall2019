@@ -15,6 +15,7 @@ rh.KEY_MOVIE = "movie";
 rh.KEY_LAST_TOUCHED = "lastTouched";
 
 rh.fbMovieQuotesManager = null;
+rh.fbSingleMovieQuoteManager = null;
 
 rh.MovieQuote = class {
 	constructor(id, quote, movie) {
@@ -226,7 +227,15 @@ $(document).ready(() => {
 		new rh.ListPageController();
 	} else if ($("#detail-page").length) {
 		console.log("On the detail page");
-		
+		const movieQuoteId = rh.storage.getMovieQuoteId();
+		if (movieQuoteId) {
+			rh.fbSingleMovieQuoteManager = new rh.FbSingleMovieQuoteManager(movieQuoteId);
+			new rh.DetailPageController();
+			console.log("Worked so far!");
+		} else {
+			console.log("Missing a movie quote id");
+			window.location.href = "/";
+		}
 	}
 	
 
