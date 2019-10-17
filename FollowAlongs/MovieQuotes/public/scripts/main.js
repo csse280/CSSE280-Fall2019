@@ -132,27 +132,27 @@ rh.ListPageController = class {
 	      </li>`);
 		$newCard.click((event) => {
 			console.log("You have clicked", movieQuote);
-			rh.storage.setMovieQuoteId(movieQuote.id);
-			window.location.href = "/moviequote.html";
+			// rh.storage.setMovieQuoteId(movieQuote.id);
+			window.location.href = `/moviequote.html?id=${movieQuote.id}`;
 		});
 		return $newCard;
 	}
 }
 
 
-rh.storage = rh.storage || {};
-rh.storage.KEY_MOVIE_QUOTE_ID = "movieQuoteId";
-rh.storage.setMovieQuoteId = function(movieQuoteId) {
-	sessionStorage.setItem(rh.storage.KEY_MOVIE_QUOTE_ID, movieQuoteId);
-}
+// rh.storage = rh.storage || {};
+// rh.storage.KEY_MOVIE_QUOTE_ID = "movieQuoteId";
+// rh.storage.setMovieQuoteId = function(movieQuoteId) {
+// 	sessionStorage.setItem(rh.storage.KEY_MOVIE_QUOTE_ID, movieQuoteId);
+// }
 
-rh.storage.getMovieQuoteId = function() {
-	const movieQuoteId = sessionStorage.getItem(rh.storage.KEY_MOVIE_QUOTE_ID);
-	if (!movieQuoteId) {
-		console.log("Missing the Movie Quote ID!!!!!");
-	}
-	return movieQuoteId;
-}
+// rh.storage.getMovieQuoteId = function() {
+// 	const movieQuoteId = sessionStorage.getItem(rh.storage.KEY_MOVIE_QUOTE_ID);
+// 	if (!movieQuoteId) {
+// 		console.log("Missing the Movie Quote ID!!!!!");
+// 	}
+// 	return movieQuoteId;
+// }
 
 rh.FbSingleMovieQuoteManager = class {
 	constructor(movieQuoteId) {
@@ -173,7 +173,7 @@ rh.FbSingleMovieQuoteManager = class {
 			} else {
 				// This document does not exist (or has been deleted)
 				window.location.href = "/";
-			}			
+			}
 		});
 	}
 
@@ -191,7 +191,7 @@ rh.FbSingleMovieQuoteManager = class {
 	get quote() {
 		return this._document.get(rh.KEY_QUOTE);
 	}
-	
+
 	get movie() {
 		return this._document.get(rh.KEY_MOVIE);
 	}
@@ -231,7 +231,9 @@ $(document).ready(() => {
 		new rh.ListPageController();
 	} else if ($("#detail-page").length) {
 		console.log("On the detail page");
-		const movieQuoteId = rh.storage.getMovieQuoteId();
+		// const movieQuoteId = rh.storage.getMovieQuoteId();
+		var urlParams = new URLSearchParams(window.location.search);
+		const movieQuoteId = urlParams.get('id');
 		if (movieQuoteId) {
 			rh.fbSingleMovieQuoteManager = new rh.FbSingleMovieQuoteManager(movieQuoteId);
 			new rh.DetailPageController();
@@ -240,6 +242,4 @@ $(document).ready(() => {
 			window.location.href = "/";
 		}
 	}
-	
-
 });
