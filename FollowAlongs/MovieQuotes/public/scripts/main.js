@@ -162,17 +162,19 @@ rh.FbSingleMovieQuoteManager = class {
 	}
 
 	beginListening(changeListener) {
-		// console.log("Listening for movie quotes");
-		// this._unsubscribe = this._ref.orderBy(rh.KEY_LAST_TOUCHED, "desc").limit(30).onSnapshot((querySnapshot) => {
-		// 	this._documentSnapshots = querySnapshot.docs;
-		// 	console.log("Update " + this._documentSnapshots.length + " movie quotes");
-		// 	// querySnapshot.forEach( (doc) => {
-		// 	// 	console.log(doc.data());
-		// 	// });
-		// 	if (changeListener) {
-		// 		changeListener();
-		// 	}
-		// });
+		console.log("Listening for this movie quote");
+		this._unsubscribe = this._ref.onSnapshot((doc) => {
+			if (doc.exists) {
+				this._document = doc;
+				console.log('doc.data() :', doc.data());
+				if (changeListener) {
+					changeListener();
+				}
+			} else {
+				// This document does not exist (or has been deleted)
+				window.location.href = "/";
+			}			
+		});
 	}
 
 	stopListening() {
@@ -196,7 +198,7 @@ rh.FbSingleMovieQuoteManager = class {
 
 rh.DetailPageController = class {
 	constructor() {
-		// rh.fbMovieQuotesManager.beginListening(this.updateView.bind(this));
+		rh.fbSingleMovieQuoteManager.beginListening(this.updateView.bind(this));
 		// // $("#addQuoteDialog").on("show.bs.modal", function (e) {
 		// // 	$("#inputQuote").val("");
 		// // 	$("#inputMovie").val("");			
@@ -231,7 +233,6 @@ $(document).ready(() => {
 		if (movieQuoteId) {
 			rh.fbSingleMovieQuoteManager = new rh.FbSingleMovieQuoteManager(movieQuoteId);
 			new rh.DetailPageController();
-			console.log("Worked so far!");
 		} else {
 			console.log("Missing a movie quote id");
 			window.location.href = "/";
