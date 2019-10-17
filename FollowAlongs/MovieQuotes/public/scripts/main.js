@@ -182,7 +182,13 @@ rh.FbSingleMovieQuoteManager = class {
 	}
 
 	update(quote, movie) {
-
+		this._ref.update({
+			[rh.KEY_QUOTE]: quote,
+			[rh.KEY_MOVIE]: movie,
+			[rh.KEY_LAST_TOUCHED]: firebase.firestore.Timestamp.now()			
+		}).then((docRef) => {
+			console.log("The update is complete");
+		});
 	}
 	delete() {
 
@@ -200,20 +206,18 @@ rh.FbSingleMovieQuoteManager = class {
 rh.DetailPageController = class {
 	constructor() {
 		rh.fbSingleMovieQuoteManager.beginListening(this.updateView.bind(this));
-		// // $("#addQuoteDialog").on("show.bs.modal", function (e) {
-		// // 	$("#inputQuote").val("");
-		// // 	$("#inputMovie").val("");			
-		// // });
-		// $("#addQuoteDialog").on("shown.bs.modal", function (e) {
-		// 	$("#inputQuote").trigger("focus");
-		// });
-		// $("#submitAddQuote").click((event) => {
-		// 	const quote = $("#inputQuote").val();
-		// 	const movie = $("#inputMovie").val();
-		// 	rh.fbMovieQuotesManager.add(quote, movie);
-		// 	$("#inputQuote").val("");
-		// 	$("#inputMovie").val("");
-		// })
+		$("#editQuoteDialog").on("show.bs.modal", function (e) {
+			$("#inputQuote").val(rh.fbSingleMovieQuoteManager.quote);
+			$("#inputMovie").val(rh.fbSingleMovieQuoteManager.movie);
+		});
+		$("#editQuoteDialog").on("shown.bs.modal", function (e) {
+			$("#inputQuote").trigger("focus");
+		});
+		$("#submitEditQuote").click((event) => {
+			const quote = $("#inputQuote").val();
+			const movie = $("#inputMovie").val();
+			rh.fbSingleMovieQuoteManager.update(quote, movie);
+		})
 	}
 
 	updateView() {
