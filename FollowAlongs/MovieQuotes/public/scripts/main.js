@@ -98,7 +98,7 @@ rh.ListPageController = class {
 			rh.fbMovieQuotesManager.add(quote, movie);
 			$("#inputQuote").val("");
 			$("#inputMovie").val("");
-		})
+		});
 	}
 
 	updateView() {
@@ -172,7 +172,8 @@ rh.FbSingleMovieQuoteManager = class {
 				}
 			} else {
 				// This document does not exist (or has been deleted)
-				window.location.href = "/";
+				//window.location.href = "/";
+
 			}
 		});
 	}
@@ -191,7 +192,7 @@ rh.FbSingleMovieQuoteManager = class {
 		});
 	}
 	delete() {
-
+		return this._ref.delete();
 	}
 
 	get quote() {
@@ -217,7 +218,14 @@ rh.DetailPageController = class {
 			const quote = $("#inputQuote").val();
 			const movie = $("#inputMovie").val();
 			rh.fbSingleMovieQuoteManager.update(quote, movie);
-		})
+		});
+
+		$("#deleteQuote").click((event) => {
+			rh.fbSingleMovieQuoteManager.delete().then(() => {
+				window.location.href = "/";
+			});
+		});
+
 	}
 
 	updateView() {
