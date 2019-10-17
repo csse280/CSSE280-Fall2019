@@ -189,10 +189,11 @@ rh.FbSingleMovieQuoteManager = class {
 	}
 
 	get quote() {
-
+		return this._document.get(rh.KEY_QUOTE);
 	}
+	
 	get movie() {
-
+		return this._document.get(rh.KEY_MOVIE);
 	}
 }
 
@@ -216,7 +217,8 @@ rh.DetailPageController = class {
 	}
 
 	updateView() {
-
+		$("#cardQuote").html(rh.fbSingleMovieQuoteManager.quote);
+		$("#cardMovie").html(rh.fbSingleMovieQuoteManager.movie);
 	}
 }
 
