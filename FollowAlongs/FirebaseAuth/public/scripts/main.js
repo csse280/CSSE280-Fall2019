@@ -9,11 +9,10 @@
 var rh = rh || {};
 
 rh.enableEmailPassword = function () {
-	const username = new mdc.textField.MDCTextField(document.querySelector('.username'));
+	const email = new mdc.textField.MDCTextField(document.querySelector('.email'));
 	const password = new mdc.textField.MDCTextField(document.querySelector('.password'));
-
-	new mdc.ripple.MDCRipple(document.querySelector('.cancel'));
-	new mdc.ripple.MDCRipple(document.querySelector('.next'));
+	new mdc.ripple.MDCRipple(document.querySelector('#createAccount'));
+	new mdc.ripple.MDCRipple(document.querySelector('#login'));
 };
 
 /* Main */
