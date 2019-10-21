@@ -2,11 +2,15 @@
  * @fileoverview
  * Provides interactions for all pages in the UI.
  *
- * @author 
+ * @author  Dave Fisher
  */
 
 /** namespace. */
 var rh = rh || {};
+
+rh.beginAuthListening = function() {
+	// TODO: Start here on Tuesday
+}
 
 rh.enableEmailPassword = function () {
 	const email = new mdc.textField.MDCTextField(document.querySelector('.email'));
@@ -23,5 +27,5 @@ $(document).ready(() => {
 	// const topAppBar = new mdc.topAppBar.MDCTopAppBar(topAppBarElement);
 
 	rh.enableEmailPassword();
-
+	rh.beginAuthListening();
 });
