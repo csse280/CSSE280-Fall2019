@@ -8,33 +8,21 @@
 /** namespace. */
 var rh = rh || {};
 
-/** globals */
-rh.variableName = "";
+rh.enableEmailPassword = function () {
+	const username = new mdc.textField.MDCTextField(document.querySelector('.username'));
+	const password = new mdc.textField.MDCTextField(document.querySelector('.password'));
 
-/** function and class syntax examples */
-rh.functionName = function () {
-	/** function body */
+	new mdc.ripple.MDCRipple(document.querySelector('.cancel'));
+	new mdc.ripple.MDCRipple(document.querySelector('.next'));
 };
-
-rh.ClassName = class {
-	/** constructor */
-	constructor() {
-
-	}
-	methodName() {
-
-	}
-}
 
 /* Main */
 $(document).ready(() => {
 	console.log("Ready");
-
-	mdc.ripple.MDCRipple.attachTo(document.querySelector('.foo-button'));
-	// mdc.ripple.MDCRipple.attachTo($('.foo-button').get(0));
-
+	// Kept for reference only
 	// const topAppBarElement = document.querySelector('.mdc-top-app-bar');
 	// const topAppBar = new mdc.topAppBar.MDCTopAppBar(topAppBarElement);
 
+	rh.enableEmailPassword();
 
 });
