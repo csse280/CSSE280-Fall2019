@@ -1,3 +1,7 @@
+:root {
+    --mdc-theme-primary: #800000;
+}
+
 body {
     background: #DDDDDD;
     margin: 0;
