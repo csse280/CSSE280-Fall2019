@@ -1,12 +1,8 @@
 body {
     background: #DDDDDD;
-}
-
-.navbar {
-    background-color: #800000;
-    color: white;
+    margin: 0;
 }
 
 .page-container {
-    margin-top: 75px;
+    padding-top: 70px;
 }

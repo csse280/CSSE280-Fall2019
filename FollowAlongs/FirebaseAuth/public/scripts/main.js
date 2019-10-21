@@ -29,7 +29,12 @@ rh.ClassName = class {
 /* Main */
 $(document).ready(() => {
 	console.log("Ready");
-	
+
 	mdc.ripple.MDCRipple.attachTo(document.querySelector('.foo-button'));
+	// mdc.ripple.MDCRipple.attachTo($('.foo-button').get(0));
+
+	// const topAppBarElement = document.querySelector('.mdc-top-app-bar');
+	// const topAppBar = new mdc.topAppBar.MDCTopAppBar(topAppBarElement);
+
 
 });
