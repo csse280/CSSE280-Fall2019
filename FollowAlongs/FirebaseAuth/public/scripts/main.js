@@ -28,5 +28,8 @@ rh.ClassName = class {
 
 /* Main */
 $(document).ready(() => {
-    console.log("Ready");
+	console.log("Ready");
+	
+	mdc.ripple.MDCRipple.attachTo(document.querySelector('.foo-button'));
+
 });
