@@ -44,17 +44,17 @@ rh.enableEmailPassword = function () {
 			// CONSIDER: In a real tell the user what is wrong.
 			console.log(`Error ${error.code}: ${error.message}`);
 		});
-
-
-
 	});
 	$("#login").click((event) => {
-		console.log("TODO: Log in an existing user");
-
-
-		
+		console.log("Log in an existing user");
+		const emailValue = $("#email-input").val();
+		const passwordValue = $("#password-input").val();
+		console.log("Create a new user", emailValue, passwordValue);
+		firebase.auth().signInWithEmailAndPassword(emailValue, passwordValue).catch(function (error) {
+			// CONSIDER: In a real tell the user what is wrong.
+			console.log(`Error ${error.code}: ${error.message}`);
+		});
 	});
-
 };
 
 /* Main */
