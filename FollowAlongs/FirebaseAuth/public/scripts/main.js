@@ -12,18 +12,20 @@ rh.beginAuthListening = function () {
 	firebase.auth().onAuthStateChanged(function (user) {
 		if (user) {
 			// User is signed in.
-			var displayName = user.displayName;
-			var email = user.email;
-			var emailVerified = user.emailVerified;
-			var photoURL = user.photoURL;
-			var isAnonymous = user.isAnonymous;
-			var uid = user.uid;
-			var providerData = user.providerData;
-
+			$("#uid").html(`<b>uid</b>: ${user.uid}`);
+			$("#email").html(`<b>email</b>: ${user.email}`);
+			$("#displayName").html(`<b>displayName</b>: ${user.displayName}`);
+			$("#photoURL").attr("src", user.photoURL);
+			$("#phoneNumber").html(`<b>phone #</b>: ${user.phoneNumber}`);
+			console.log(user.providerData);
 			console.log("A user IS signed in.  Uid = ", user.uid);
+			$("#emailPassword").hide();
+			$("#userInfo").show();
 		} else {
 			// User is signed out.
 			console.log("There is no user.  Nobody is signed in.");
+			$("#emailPassword").show();
+			$("#userInfo").hide();
 		}
 	});
 }
@@ -48,6 +50,9 @@ rh.enableEmailPassword = function () {
 	});
 	$("#login").click((event) => {
 		console.log("TODO: Log in an existing user");
+
+
+		
 	});
 
 };
@@ -61,4 +66,8 @@ $(document).ready(() => {
 
 	rh.enableEmailPassword();
 	rh.beginAuthListening();
+
+	$("#signOut").click((event) => {
+		firebase.auth().signOut()
+	});
 });
