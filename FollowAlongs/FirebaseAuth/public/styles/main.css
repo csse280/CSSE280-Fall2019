@@ -39,3 +39,7 @@ body {
 .mdc-card__actions {
     justify-content: flex-end;
 }
+
+#photoURL {
+    width: 125px;
+}

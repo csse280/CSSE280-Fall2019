@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   <link rel="stylesheet" href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css">
+  <link rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
   <link rel="stylesheet" href="styles/main.css">
   <title>Firebase Auth</title>
 </head>
@@ -19,6 +20,7 @@
     </div>
   </header>
   <div id="main-page" class="page-container">
+    <div id="firebaseui-auth-container"></div>
     <div id="emailPassword">
       <div class="mdc-text-field email">
         <input type="text" class="mdc-text-field__input" id="email-input" name="email">
@@ -51,10 +53,10 @@
       <img id="photoURL" alt="This provider has no image">
       <div id="phoneNumber"></div>
       <div class="mdc-card__actions">
-          <button id="signOut" class="mdc-button mdc-card__action mdc-card__action--button">
-            <span class="mdc-button__label">SIGN OUT</span>
-          </button>
-        </div>
+        <button id="signOut" class="mdc-button mdc-card__action mdc-card__action--button">
+          <span class="mdc-button__label">SIGN OUT</span>
+        </button>
+      </div>
     </div>
   </div>
   <script src="scripts/jquery.min.js"></script>
@@ -62,6 +64,7 @@
   <script src="/__/firebase/6.3.5/firebase-app.js"></script>
   <script src="/__/firebase/6.3.5/firebase-auth.js"></script>
   <script src="/__/firebase/init.js"></script>
+  <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
   <script src="scripts/main.js"></script>
 </body>
 
