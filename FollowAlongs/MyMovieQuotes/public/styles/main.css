@@ -58,3 +58,13 @@ body {
 [data-toggle="dropdown"] {
     cursor: pointer;
 }
+
+#roselogo {
+    display: block;
+}
+
+#rosefireButton {
+    display: block;
+    margin-top: 60px;
+    background: #800000;
+}

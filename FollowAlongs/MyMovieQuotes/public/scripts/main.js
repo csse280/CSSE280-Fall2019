@@ -14,6 +14,8 @@ rh.KEY_QUOTE = "quote";
 rh.KEY_MOVIE = "movie";
 rh.KEY_LAST_TOUCHED = "lastTouched";
 
+rh.ROSEFIRE_REGISTRY_TOKEN = "9d14d1f4-c5c0-42ef-bba1-584e75dc20e5";
+
 rh.fbMovieQuotesManager = null;
 rh.fbSingleMovieQuoteManager = null;
 
