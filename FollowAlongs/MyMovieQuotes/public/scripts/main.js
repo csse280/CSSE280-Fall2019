@@ -18,6 +18,7 @@ rh.ROSEFIRE_REGISTRY_TOKEN = "9d14d1f4-c5c0-42ef-bba1-584e75dc20e5";
 
 rh.fbMovieQuotesManager = null;
 rh.fbSingleMovieQuoteManager = null;
+rh.fbAuthManager = null;
 
 rh.MovieQuote = class {
 	constructor(id, quote, movie) {
@@ -188,7 +189,7 @@ rh.FbSingleMovieQuoteManager = class {
 		this._ref.update({
 			[rh.KEY_QUOTE]: quote,
 			[rh.KEY_MOVIE]: movie,
-			[rh.KEY_LAST_TOUCHED]: firebase.firestore.Timestamp.now()			
+			[rh.KEY_LAST_TOUCHED]: firebase.firestore.Timestamp.now()
 		}).then((docRef) => {
 			console.log("The update is complete");
 		});
@@ -236,9 +237,66 @@ rh.DetailPageController = class {
 	}
 }
 
+rh.FbAuthManager = class {
+	constructor() {
+		
+		this.uid = null;
+		this.isSignIn = false;
+	}
+	beginListening(changeListener) {
+		console.log("TODO: Listen for auth state changes");
+
+		firebase.auth().onAuthStateChanged((user) => {
+			if (user) {
+			  // User is signed in.
+			  console.log("User = ", user);
+
+			} else {
+			  // User is signed out.
+			  // ...
+			}
+		  });
+	}
+	signIn() {
+		console.log("Rosefire Sign in");
+		Rosefire.signIn(rh.ROSEFIRE_REGISTRY_TOKEN, (err, rfUser) => {
+			if (err) {
+				console.log("Rosefire error.", err);
+				return;
+			}
+			console.log("Rosefire login worked!", rfUser);
+			firebase.auth().signInWithCustomToken(rfUser.token).then((authData) => {
+				// User logged in successfully 
+				console.log("Firebase auth worked too!");
+			}, function (error) {
+				// User not logged in!
+				console.log("Firebase auth failed.  Dr. Fisher has never seen this happen.");
+			});
+		});
+	}
+
+	signOut() {
+
+	}
+}
+
+rh.LoginPageController = class {
+	constructor() {
+		$("#rosefireButton").click((event) => {
+			rh.fbAuthManager.signIn();
+		});
+	}
+}
+
 /* Main */
 $(document).ready(() => {
 	console.log("Ready");
+	rh.fbAuthManager = new rh.FbAuthManager();
+	rh.fbAuthManager.beginListening(() => {
+		console.log("TODO: Handle auth state changes. isSignedIn = ", rh.fbAuthManager.isSignIn);
+	});
+
+	// Initialization:
 	if ($("#list-page").length) {
 		console.log("On the list page");
 		rh.fbMovieQuotesManager = new rh.FbMovieQuotesManager();
@@ -255,5 +313,8 @@ $(document).ready(() => {
 			console.log("Missing a movie quote id");
 			window.location.href = "/";
 		}
+	} else if ($("#login-page").length) {
+		console.log("On the login page.");
+		new rh.LoginPageController();
 	}
 });
