@@ -1,0 +1,60 @@
+body {
+    background: #DDDDDD;
+}
+
+.navbar {
+    background-color: #800000;
+    color: white;
+}
+
+.page-container {
+    margin-top: 70px;
+}
+
+#fab {
+    position: fixed;
+    bottom: 4px;
+    right: 0px;
+    z-index: 999;
+}
+
+#fab:active {
+    transform: translateY(4px);
+    opacity: 0.8;
+}
+
+.btn-outline-light {
+    color: #800000;
+}
+
+.modal-header {
+    border: none;
+    padding-bottom: 0;
+}
+
+.modal-footer {
+    border: none;
+    padding-top: 0;
+}
+
+.quote-card-quote,
+.quote-card-movie {
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.quote-card-quote {
+    font-size: 1.5em;
+}
+
+.quote-card-movie {
+    font-size: 1.2em;
+}
+
+.quote-card {
+    margin: 2px;
+}
+
+[data-toggle="dropdown"] {
+    cursor: pointer;
+}
