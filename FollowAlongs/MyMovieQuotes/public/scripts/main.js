@@ -239,24 +239,30 @@ rh.DetailPageController = class {
 
 rh.FbAuthManager = class {
 	constructor() {
-		
-		this.uid = null;
-		this.isSignIn = false;
+		this._user = null;
+		// this.uid = null;
+		// this.isSignIn = false;
 	}
+	get uid() {
+		if (this._user) {
+			return this._user.uid;	
+		}
+		console.log("There is no user!");
+		return "";
+	}
+
+	get isSignIn() {
+		return !!this._user;
+	}
+
 	beginListening(changeListener) {
-		console.log("TODO: Listen for auth state changes");
-
+		console.log("Listen for auth state changes");
 		firebase.auth().onAuthStateChanged((user) => {
-			if (user) {
-			  // User is signed in.
-			  console.log("User = ", user);
-
-			} else {
-			  // User is signed out.
-			  // ...
-			}
+			this._user = user;
+			changeListener();
 		  });
 	}
+	
 	signIn() {
 		console.log("Rosefire Sign in");
 		Rosefire.signIn(rh.ROSEFIRE_REGISTRY_TOKEN, (err, rfUser) => {
