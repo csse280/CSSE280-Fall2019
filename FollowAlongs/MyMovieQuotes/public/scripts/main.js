@@ -88,6 +88,18 @@ rh.FbMovieQuotesManager = class {
 rh.ListPageController = class {
 	constructor() {
 		rh.fbMovieQuotesManager.beginListening(this.updateView.bind(this));
+		
+		$("#menuShowMyQuotes").click((event) => {
+			console.log("TODO: Show only my Movie Quotes.");
+		});
+		$("#menuShowAllQuotes").click((event) => {
+			console.log("TODO: Show all Movie Quotes.");
+		});
+		$("#menuSignOut").click((event) => {
+			console.log("Sign out.");
+			rh.fbAuthManager.signOut();
+		});
+		
 		// $("#addQuoteDialog").on("show.bs.modal", function (e) {
 		// 	$("#inputQuote").val("");
 		// 	$("#inputMovie").val("");			
@@ -282,7 +294,7 @@ rh.FbAuthManager = class {
 	}
 
 	signOut() {
-
+		firebase.auth().signOut();
 	}
 }
 

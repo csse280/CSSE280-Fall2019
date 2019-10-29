@@ -5,6 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="stylesheet" href="styles/bootstrap.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   <link rel="stylesheet" href="styles/main.css">
   <title>Movie Quotes</title>
 </head>
@@ -12,6 +13,16 @@
 <body>
   <nav class="navbar navbar-dark fixed-top">
     <a class="navbar-brand" href="#">Movie Quote</a>
+    <div class="btn-group">
+      <span data-toggle="dropdown">
+        <i class="material-icons">menu</i>
+      </span>
+      <div class="dropdown-menu dropdown-menu-right">
+        <button id="menuShowMyQuotes" class="dropdown-item" type="button">Show only my quotes</button>
+        <button id="menuShowAllQuotes" class="dropdown-item" type="button">Show all quotes</button>
+        <button id="menuSignOut" class="dropdown-item" type="button">Sign out</button>
+      </div>
+    </div>
   </nav>
   <div id="fab" data-toggle="modal" data-target="#addQuoteDialog">
     <img src="images/fab.png" alt="fab">
