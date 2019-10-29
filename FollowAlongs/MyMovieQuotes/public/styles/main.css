@@ -68,3 +68,7 @@ body {
     margin-top: 60px;
     background: #800000;
 }
+
+.initially-hidden {
+    display: none;
+}

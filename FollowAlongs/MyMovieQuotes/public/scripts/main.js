@@ -226,6 +226,10 @@ rh.FbSingleMovieQuoteManager = class {
 	get movie() {
 		return this._document.get(rh.KEY_MOVIE);
 	}
+
+	get uid() {
+		return this._document.get(rh.KEY_UID);
+	}
 }
 
 rh.DetailPageController = class {
@@ -246,7 +250,7 @@ rh.DetailPageController = class {
 
 		$("#deleteQuote").click((event) => {
 			rh.fbSingleMovieQuoteManager.delete().then(() => {
-				window.location.href = "/";
+				window.location.href = "/list.html";
 			});
 		});
 
@@ -255,6 +259,13 @@ rh.DetailPageController = class {
 	updateView() {
 		$("#cardQuote").html(rh.fbSingleMovieQuoteManager.quote);
 		$("#cardMovie").html(rh.fbSingleMovieQuoteManager.movie);
+
+		// Show edit and delete if allowed.
+		if(rh.fbSingleMovieQuoteManager.uid == rh.fbAuthManager.uid) {
+			$("#menuEdit").show();
+			$("#menuDelete").show();
+		}
+
 	}
 }
 

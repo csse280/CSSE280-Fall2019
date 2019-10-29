@@ -12,14 +12,15 @@
 
 <body>
   <nav class="navbar navbar-dark fixed-top">
-    <a class="navbar-brand" href="/">Movie Quote</a>
+    <a class="navbar-brand" href="/list.html">Movie Quote</a>
     <div class="btn-group">
       <span data-toggle="dropdown">
         <i class="material-icons">menu</i>
       </span>
       <div class="dropdown-menu dropdown-menu-right">
-        <button class="dropdown-item" type="button" data-target="#editQuoteDialog" data-toggle="modal">Edit</button>
-        <button class="dropdown-item" type="button" data-target="#deleteQuoteDialog" data-toggle="modal">Delete</button>
+        <button id="menuEdit" class="initially-hidden dropdown-item" type="button" data-target="#editQuoteDialog" data-toggle="modal">Edit</button>
+        <button id="menuDelete" class="initially-hidden dropdown-item" type="button" data-target="#deleteQuoteDialog" data-toggle="modal">Delete</button>
+        <button id="menuSignOut" class="dropdown-item" type="button">Sign out</button>
       </div>
     </div>
   </nav>
