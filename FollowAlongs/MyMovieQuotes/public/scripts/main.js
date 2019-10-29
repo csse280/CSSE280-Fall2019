@@ -13,6 +13,7 @@ rh.COLLECTION_MOVIEQUOTES = "MovieQuotes";
 rh.KEY_QUOTE = "quote";
 rh.KEY_MOVIE = "movie";
 rh.KEY_LAST_TOUCHED = "lastTouched";
+rh.KEY_UID = "uid";
 
 rh.ROSEFIRE_REGISTRY_TOKEN = "9d14d1f4-c5c0-42ef-bba1-584e75dc20e5";
 
@@ -29,15 +30,20 @@ rh.MovieQuote = class {
 }
 
 rh.FbMovieQuotesManager = class {
-	constructor() {
+	constructor(uid) {
 		this._ref = firebase.firestore().collection(rh.COLLECTION_MOVIEQUOTES);
 		this._documentSnapshots = [];
 		this._unsubscribe = null;
+		this._uid = uid;
 	}
 
 	beginListening(changeListener) {
 		console.log("Listening for movie quotes");
-		this._unsubscribe = this._ref.orderBy(rh.KEY_LAST_TOUCHED, "desc").limit(30).onSnapshot((querySnapshot) => {
+		let query = this._ref.orderBy(rh.KEY_LAST_TOUCHED, "desc").limit(30);
+		if (this._uid) {
+			query = query.where(rh.KEY_UID, "==", this._uid);
+		}
+		this._unsubscribe = query.onSnapshot((querySnapshot) => {
 			this._documentSnapshots = querySnapshot.docs;
 			console.log("Update " + this._documentSnapshots.length + " movie quotes");
 			// querySnapshot.forEach( (doc) => {
@@ -88,7 +94,7 @@ rh.FbMovieQuotesManager = class {
 rh.ListPageController = class {
 	constructor() {
 		rh.fbMovieQuotesManager.beginListening(this.updateView.bind(this));
-		
+
 		$("#menuShowMyQuotes").click((event) => {
 			console.log("Show only my Movie Quotes.");
 			window.location.href = `/list.html?uid=${rh.fbAuthManager.uid}`;
@@ -101,7 +107,7 @@ rh.ListPageController = class {
 			console.log("Sign out.");
 			rh.fbAuthManager.signOut();
 		});
-		
+
 		// $("#addQuoteDialog").on("show.bs.modal", function (e) {
 		// 	$("#inputQuote").val("");
 		// 	$("#inputMovie").val("");			
@@ -320,14 +326,16 @@ rh.checkForRedirects = function () {
 
 rh.initializePage = function () {
 	// Initialization
+	var urlParams = new URLSearchParams(window.location.search);
 	if ($("#list-page").length) {
 		console.log("On the list page");
-		rh.fbMovieQuotesManager = new rh.FbMovieQuotesManager();
+		const urlUid = urlParams.get('uid');
+		rh.fbMovieQuotesManager = new rh.FbMovieQuotesManager(urlUid);
 		new rh.ListPageController();
 	} else if ($("#detail-page").length) {
 		console.log("On the detail page");
 		// const movieQuoteId = rh.storage.getMovieQuoteId();
-		var urlParams = new URLSearchParams(window.location.search);
+		
 		const movieQuoteId = urlParams.get('id');
 		if (movieQuoteId) {
 			rh.fbSingleMovieQuoteManager = new rh.FbSingleMovieQuoteManager(movieQuoteId);
