@@ -245,7 +245,7 @@ rh.FbAuthManager = class {
 	}
 	get uid() {
 		if (this._user) {
-			return this._user.uid;	
+			return this._user.uid;
 		}
 		console.log("There is no user!");
 		return "";
@@ -260,9 +260,9 @@ rh.FbAuthManager = class {
 		firebase.auth().onAuthStateChanged((user) => {
 			this._user = user;
 			changeListener();
-		  });
+		});
 	}
-	
+
 	signIn() {
 		console.log("Rosefire Sign in");
 		Rosefire.signIn(rh.ROSEFIRE_REGISTRY_TOKEN, (err, rfUser) => {
@@ -294,15 +294,18 @@ rh.LoginPageController = class {
 	}
 }
 
-/* Main */
-$(document).ready(() => {
-	console.log("Ready");
-	rh.fbAuthManager = new rh.FbAuthManager();
-	rh.fbAuthManager.beginListening(() => {
-		console.log("TODO: Handle auth state changes. isSignedIn = ", rh.fbAuthManager.isSignIn);
-	});
+rh.checkForRedirects = function () {
+	// Redirects
+	if ($("#login-page").length && rh.fbAuthManager.isSignIn) {
+		window.location.href = "/list.html";
+	}
+	if (!$("#login-page").length && !rh.fbAuthManager.isSignIn) {
+		window.location.href = "/";
+	}
+}
 
-	// Initialization:
+rh.initializePage = function () {
+	// Initialization
 	if ($("#list-page").length) {
 		console.log("On the list page");
 		rh.fbMovieQuotesManager = new rh.FbMovieQuotesManager();
@@ -317,10 +320,21 @@ $(document).ready(() => {
 			new rh.DetailPageController();
 		} else {
 			console.log("Missing a movie quote id");
-			window.location.href = "/";
+			window.location.href = "/list.html";
 		}
 	} else if ($("#login-page").length) {
 		console.log("On the login page.");
 		new rh.LoginPageController();
 	}
+}
+
+/* Main */
+$(document).ready(() => {
+	console.log("Ready");
+	rh.fbAuthManager = new rh.FbAuthManager();
+	rh.fbAuthManager.beginListening(() => {
+		console.log("Auth state changed. isSignedIn = ", rh.fbAuthManager.isSignIn);
+		rh.checkForRedirects();
+		rh.initializePage();
+	});
 });
