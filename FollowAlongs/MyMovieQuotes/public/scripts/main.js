@@ -90,10 +90,12 @@ rh.ListPageController = class {
 		rh.fbMovieQuotesManager.beginListening(this.updateView.bind(this));
 		
 		$("#menuShowMyQuotes").click((event) => {
-			console.log("TODO: Show only my Movie Quotes.");
+			console.log("Show only my Movie Quotes.");
+			window.location.href = `/list.html?uid=${rh.fbAuthManager.uid}`;
 		});
 		$("#menuShowAllQuotes").click((event) => {
-			console.log("TODO: Show all Movie Quotes.");
+			console.log("Show all Movie Quotes.");
+			window.location.href = "/list.html";
 		});
 		$("#menuSignOut").click((event) => {
 			console.log("Sign out.");
