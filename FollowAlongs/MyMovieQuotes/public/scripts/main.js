@@ -63,7 +63,8 @@ rh.FbMovieQuotesManager = class {
 		this._ref.add({
 			[rh.KEY_QUOTE]: quote,
 			[rh.KEY_MOVIE]: movie,
-			[rh.KEY_LAST_TOUCHED]: firebase.firestore.Timestamp.now()
+			[rh.KEY_LAST_TOUCHED]: firebase.firestore.Timestamp.now(),
+			[rh.KEY_UID]: rh.fbAuthManager.uid,
 		}).then((docRef) => {
 			console.log("Document has been added with id", docRef.id);
 		}).catch((error) => {
