@@ -15,11 +15,16 @@ rh.KEY_MOVIE = "movie";
 rh.KEY_LAST_TOUCHED = "lastTouched";
 rh.KEY_UID = "uid";
 
+rh.COLLECTION_USERS = "Users";
+rh.KEY_NAME = "name";
+rh.KEY_PHOTO_URL = "photoUrl";
+
 rh.ROSEFIRE_REGISTRY_TOKEN = "9d14d1f4-c5c0-42ef-bba1-584e75dc20e5";
 
 rh.fbMovieQuotesManager = null;
 rh.fbSingleMovieQuoteManager = null;
 rh.fbAuthManager = null;
+rh.fbUserManager = null;
 
 rh.MovieQuote = class {
 	constructor(id, quote, movie) {
@@ -330,6 +335,82 @@ rh.LoginPageController = class {
 	}
 }
 
+rh.FbUserManager = class {
+	constructor() {
+		this._collectionRef = firebase.firestore().collection(rh.COLLECTION_USERS);
+		this._document = {};
+		this._unsubscribe = null;
+	}
+
+	beginListening(uid, changeListener) {
+		// TODO: Test this function!!!!
+		console.log("Listening for user", uid);
+		this._unsubscribe = this._collectionRef.doc(uid).onSnapshot((doc) => {
+			if (doc.exists) {
+				this._document = doc;
+				console.log('doc.data() :', doc.data());
+				if (changeListener) {
+					changeListener();
+				}
+			} else {
+				console.log("This user does not exist!");
+			}
+		});
+	}
+
+	stopListening() {
+		this._unsubscribe();
+	}
+
+	setUser(rfUser) {
+
+	}
+
+	updateName(name) {
+		// TODO: Implement
+
+		// this._ref.update({
+		// 	[rh.KEY_QUOTE]: quote,
+		// 	[rh.KEY_MOVIE]: movie,
+		// 	[rh.KEY_LAST_TOUCHED]: firebase.firestore.Timestamp.now()
+		// }).then((docRef) => {
+		// 	console.log("The update is complete");
+		// });
+	}
+
+	updatePhotoUrl(photoUrl) {
+		// TODO: Implement
+	}
+
+	get name() {
+		return this._document.get(rh.KEY_NAME);
+	}
+
+	get photoUrl() {
+		return this._document.get(rh.KEY_PHOTO_URL);
+	}
+}
+
+rh.ProfilePageController = class {
+	constructor() {
+		$("#menuSignOut").click((event) => {
+			console.log("Sign out.");
+			rh.fbAuthManager.signOut();
+		});
+		$("#updateProfilePhoto").click((event) => {
+			console.log("TODO: Update profile photo");
+		});
+
+		$("#updateName").click((event) => {
+			console.log("TODO: Update name");
+		});
+	}
+
+	updateView() {
+
+	}
+}
+
 rh.checkForRedirects = function () {
 	// Redirects
 	if ($("#login-page").length && rh.fbAuthManager.isSignIn) {
@@ -363,6 +444,9 @@ rh.initializePage = function () {
 	} else if ($("#login-page").length) {
 		console.log("On the login page.");
 		new rh.LoginPageController();
+	} else if ($("#profile-page").length) {
+		console.log("On the profile page.");
+		new rh.ProfilePageController();
 	}
 }
 
@@ -370,6 +454,7 @@ rh.initializePage = function () {
 $(document).ready(() => {
 	console.log("Ready");
 	rh.fbAuthManager = new rh.FbAuthManager();
+	rh.fbUserManager = new rh.FbUserManager();
 	rh.fbAuthManager.beginListening(() => {
 		console.log("Auth state changed. isSignedIn = ", rh.fbAuthManager.isSignIn);
 		rh.checkForRedirects();
