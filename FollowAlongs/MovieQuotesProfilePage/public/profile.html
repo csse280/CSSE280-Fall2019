@@ -27,11 +27,19 @@
   <div id="profile-page" class="container page-container">
     <div class="row justify-content-center">
       <div class="card col-11 mt-4 col-md-8 mt-md-5">
-        
-
-
+        <div>
+          <img id="profilePhoto" src="/images/missing_photo.png" alt="No Profile Photo">
+        </div>
+        <button id="updateProfilePhoto" type="button" class="mr-auto btn btn-outline-light">Update profile
+          photo</button>
+        <div class="card-body">
+          <h5 class="card-title">Display name:</h5>
+          <input type="text" id="name" class="form-control" placeholder="Your name">
+          <button id="updateName" type="button" class="ml-auto btn btn-dark">Update name</button>
+        </div>
       </div>
     </div>
+  </div>
   </div>
 
   <script src="scripts/jquery.min.js"></script>

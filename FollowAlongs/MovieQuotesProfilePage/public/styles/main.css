@@ -72,3 +72,22 @@ body {
 .initially-hidden {
     display: none;
 }
+
+#authorBox {
+    position: fixed;
+    bottom: 10px;
+    right: 20px;
+    z-index: 999;
+}
+
+#profilePhoto {
+    display: block;
+    max-width: 125px;
+    max-height: 150px;
+}
+
+#updateName {
+    display: block;
+    margin-top: 20px;
+    background: #800000;
+}
