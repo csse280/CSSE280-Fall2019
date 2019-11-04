@@ -242,6 +242,10 @@ rh.DetailPageController = class {
 		$("#editQuoteDialog").on("shown.bs.modal", function (e) {
 			$("#inputQuote").trigger("focus");
 		});
+		$("#menuSignOut").click((event) => {
+			console.log("Sign out.");
+			rh.fbAuthManager.signOut();
+		});
 		$("#submitEditQuote").click((event) => {
 			const quote = $("#inputQuote").val();
 			const movie = $("#inputMovie").val();
