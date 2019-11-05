@@ -426,6 +426,7 @@ rh.FbUserManager = class {
 
 rh.ProfilePageController = class {
 	constructor() {
+		rh.fbUserManager.beginListening(rh.fbAuthManager.uid, this.updateView.bind(this));
 		$("#menuSignOut").click((event) => {
 			console.log("Sign out.");
 			rh.fbAuthManager.signOut();
@@ -440,7 +441,11 @@ rh.ProfilePageController = class {
 	}
 
 	updateView() {
+		console.log("User name:", rh.fbUserManager.name);
+		console.log("User photoUrl:", rh.fbUserManager.photoUrl);
 
+		$("#name").val(rh.fbUserManager.name);
+		$("#profilePhoto").attr("src", rh.fbUserManager.photoUrl);
 	}
 }
 
