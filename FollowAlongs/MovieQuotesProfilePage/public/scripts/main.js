@@ -412,7 +412,10 @@ rh.FbUserManager = class {
 	}
 
 	updatePhotoUrl(photoUrl) {
-		// TODO: Implement
+		const userRef = this._collectionRef.doc(rh.fbAuthManager.uid);
+		userRef.update({
+			[rh.KEY_PHOTO_URL]: photoUrl
+		});
 	}
 
 	get name() {
@@ -450,8 +453,9 @@ rh.ProfilePageController = class {
 			storageRef.put(file, metadata).then(function (snapshot) {
 				console.log('Uploaded the file!');
 
-				
-
+				storageRef.getDownloadURL().then(function(url) {
+					rh.fbUserManager.updatePhotoUrl(url);
+				});
 
 			});
 		});
