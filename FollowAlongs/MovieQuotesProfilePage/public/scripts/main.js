@@ -281,8 +281,7 @@ rh.DetailPageController = class {
 rh.FbAuthManager = class {
 	constructor() {
 		this._user = null;
-		// this.uid = null;
-		// this.isSignIn = false;
+		this.rfUser = null;
 	}
 	get uid() {
 		if (this._user) {
@@ -305,21 +304,37 @@ rh.FbAuthManager = class {
 	}
 
 	signIn() {
-		console.log("Rosefire Sign in");
-		Rosefire.signIn(rh.ROSEFIRE_REGISTRY_TOKEN, (err, rfUser) => {
-			if (err) {
-				console.log("Rosefire error.", err);
-				return;
-			}
-			console.log("Rosefire login worked!", rfUser);
-			firebase.auth().signInWithCustomToken(rfUser.token).then((authData) => {
-				// User logged in successfully 
-				console.log("Firebase auth worked too!");
-			}, function (error) {
-				// User not logged in!
-				console.log("Firebase auth failed.  Dr. Fisher has never seen this happen.");
+		// TODO: Make this method return a promise.
+		// to make a promise Option #1: if there is already a promise use it!
+		// Option #2: Construct a new Promise from scratch!
+
+		return new Promise((resolve, reject) => {			
+			console.log("Rosefire Sign in");
+			Rosefire.signIn(rh.ROSEFIRE_REGISTRY_TOKEN, (err, rfUser) => {
+				if (err) {
+					console.log("Rosefire error.", err);
+					reject();
+					return;
+				}
+				console.log("Rosefire login worked!", rfUser);
+				this.rfUser = rfUser;
+				// Option #1 (which we won't do): Use the rfUser NOW and set a document in Firebase!
+				firebase.auth().signInWithCustomToken(rfUser.token).then((authData) => {
+					// User logged in successfully 
+					console.log("Firebase auth worked too!");
+					// resolve();
+
+					rh.fbUserManager.setUser(rfUser).then(() => {
+						resolve();
+					})
+				}, function (error) {
+					// User not logged in!
+					console.log("Firebase auth failed.  Dr. Fisher has never seen this happen.");
+					reject();
+				});
 			});
 		});
+		
 	}
 
 	signOut() {
@@ -330,7 +345,10 @@ rh.FbAuthManager = class {
 rh.LoginPageController = class {
 	constructor() {
 		$("#rosefireButton").click((event) => {
-			rh.fbAuthManager.signIn();
+			rh.fbAuthManager.signIn().then(() => {
+				console.log("Moved to the next page because of the promise");
+				window.location.href = "/list.html";
+			});
 		});
 	}
 }
@@ -363,7 +381,22 @@ rh.FbUserManager = class {
 	}
 
 	setUser(rfUser) {
+		// TODO: Set the User then return a promise, so that the Promise chain can continue.
 
+		console.log("Set the user for ", rfUser.username);
+		// Check to see if the User already exists
+		const userRef = this._collectionRef.doc(rfUser.username);
+		return userRef.get().then((document) => {
+			if(document.exist) {
+				// This user already exists.  This is a second login. Do nothing.
+				return;
+			} else {
+				// Create this User and set the values in the Firestore
+				return userRef.set({
+					[rh.KEY_NAME]: rfUser.name
+				});
+			}
+		});
 	}
 
 	updateName(name) {
@@ -413,7 +446,7 @@ rh.ProfilePageController = class {
 
 rh.checkForRedirects = function () {
 	// Redirects
-	if ($("#login-page").length && rh.fbAuthManager.isSignIn) {
+	if ($("#login-page").length && rh.fbAuthManager.isSignIn && !rh.fbAuthManager.rfUser) {
 		window.location.href = "/list.html";
 	}
 	if (!$("#login-page").length && !rh.fbAuthManager.isSignIn) {
