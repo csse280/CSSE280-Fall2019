@@ -266,6 +266,11 @@ rh.DetailPageController = class {
 	}
 
 	updateView() {
+		// Begin listening for the User as well now that we know the uid
+		if(!rh.fbUserManager.isListening) {
+			rh.fbUserManager.beginListening(rh.fbSingleMovieQuoteManager.uid,
+				this.updateAuthorBox.bind(this));	
+		}
 		$("#cardQuote").html(rh.fbSingleMovieQuoteManager.quote);
 		$("#cardMovie").html(rh.fbSingleMovieQuoteManager.movie);
 
@@ -274,7 +279,12 @@ rh.DetailPageController = class {
 			$("#menuEdit").show();
 			$("#menuDelete").show();
 		}
+	}
 
+	updateAuthorBox() {
+		console.log("Update the author box");
+		$("#authorName").html(rh.fbUserManager.name);
+		$("#profilePhoto").attr("src", rh.fbUserManager.photoUrl);
 	}
 }
 
@@ -374,6 +384,10 @@ rh.FbUserManager = class {
 				console.log("This user does not exist!");
 			}
 		});
+	}
+
+	get isListening() {
+		return !!this._unsubscribe;
 	}
 
 	stopListening() {
