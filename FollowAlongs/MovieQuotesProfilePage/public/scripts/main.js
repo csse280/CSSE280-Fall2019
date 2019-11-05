@@ -270,7 +270,7 @@ rh.DetailPageController = class {
 		$("#cardMovie").html(rh.fbSingleMovieQuoteManager.movie);
 
 		// Show edit and delete if allowed.
-		if(rh.fbSingleMovieQuoteManager.uid == rh.fbAuthManager.uid) {
+		if (rh.fbSingleMovieQuoteManager.uid == rh.fbAuthManager.uid) {
 			$("#menuEdit").show();
 			$("#menuDelete").show();
 		}
@@ -308,7 +308,7 @@ rh.FbAuthManager = class {
 		// to make a promise Option #1: if there is already a promise use it!
 		// Option #2: Construct a new Promise from scratch!
 
-		return new Promise((resolve, reject) => {			
+		return new Promise((resolve, reject) => {
 			console.log("Rosefire Sign in");
 			Rosefire.signIn(rh.ROSEFIRE_REGISTRY_TOKEN, (err, rfUser) => {
 				if (err) {
@@ -334,7 +334,7 @@ rh.FbAuthManager = class {
 				});
 			});
 		});
-		
+
 	}
 
 	signOut() {
@@ -387,7 +387,7 @@ rh.FbUserManager = class {
 		// Check to see if the User already exists
 		const userRef = this._collectionRef.doc(rfUser.username);
 		return userRef.get().then((document) => {
-			if(document.exist) {
+			if (document.exist) {
 				// This user already exists.  This is a second login. Do nothing.
 				return;
 			} else {
@@ -441,6 +441,19 @@ rh.ProfilePageController = class {
 		$("#fileInput").change((event) => {
 			const file = event.target.files[0];
 			console.log("The file input changed", file.name);
+
+			const storageRef = firebase.storage().ref()
+				.child(rh.COLLECTION_USERS).child(rh.fbAuthManager.uid);
+			const metadata = {
+				"content-type": file.type
+			}
+			storageRef.put(file, metadata).then(function (snapshot) {
+				console.log('Uploaded the file!');
+
+				
+
+
+			});
 		});
 	}
 
@@ -474,7 +487,7 @@ rh.initializePage = function () {
 	} else if ($("#detail-page").length) {
 		console.log("On the detail page");
 		// const movieQuoteId = rh.storage.getMovieQuoteId();
-		
+
 		const movieQuoteId = urlParams.get('id');
 		if (movieQuoteId) {
 			rh.fbSingleMovieQuoteManager = new rh.FbSingleMovieQuoteManager(movieQuoteId);
