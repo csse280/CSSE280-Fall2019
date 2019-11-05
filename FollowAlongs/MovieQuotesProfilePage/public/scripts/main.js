@@ -432,11 +432,15 @@ rh.ProfilePageController = class {
 			rh.fbAuthManager.signOut();
 		});
 		$("#updateProfilePhoto").click((event) => {
-			console.log("TODO: Update profile photo");
+			$("#fileInput").trigger("click");
 		});
 
 		$("#updateName").click((event) => {
 			console.log("TODO: Update name");
+		});
+		$("#fileInput").change((event) => {
+			const file = event.target.files[0];
+			console.log("The file input changed", file.name);
 		});
 	}
 
