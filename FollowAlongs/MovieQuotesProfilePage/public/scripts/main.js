@@ -400,15 +400,10 @@ rh.FbUserManager = class {
 	}
 
 	updateName(name) {
-		// TODO: Implement
-
-		// this._ref.update({
-		// 	[rh.KEY_QUOTE]: quote,
-		// 	[rh.KEY_MOVIE]: movie,
-		// 	[rh.KEY_LAST_TOUCHED]: firebase.firestore.Timestamp.now()
-		// }).then((docRef) => {
-		// 	console.log("The update is complete");
-		// });
+		const userRef = this._collectionRef.doc(rh.fbAuthManager.uid);
+		userRef.update({
+			[rh.KEY_NAME]: name
+		});
 	}
 
 	updatePhotoUrl(photoUrl) {
@@ -439,7 +434,7 @@ rh.ProfilePageController = class {
 		});
 
 		$("#updateName").click((event) => {
-			console.log("TODO: Update name");
+			rh.fbUserManager.updateName($("#name").val());
 		});
 		$("#fileInput").change((event) => {
 			const file = event.target.files[0];
