@@ -1,0 +1,15 @@
+{
+  "name": "gettingstartedwithnode",
+  "version": "1.0.0",
+  "description": "Learning about NPM",
+  "main": "npmAsciiArt.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "David Fisher",
+  "license": "ISC",
+  "dependencies": {
+    "figlet": "1.2.4",
+    "ascii-img-canvas-nodejs": "1.7.0"
+  }
+}
