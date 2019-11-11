@@ -11,5 +11,8 @@ app.get("/hello", (request, response) => {
 app.get("/goodbye", (request, response) => {
   response.send("<h1>Goodbye from Express</h1>");
 });
+app.post("/mypost", (request, response) => {
+  response.send("HTML code from a POST request");
+});
 
 app.listen(3000);
