@@ -1,0 +1,26 @@
+body {
+    background: #DDDDDD;
+}
+
+.navbar {
+    background-color: #800000;
+    color: white;
+}
+
+.page-container {
+    margin-top: 100px;
+}
+
+.btn {
+    background-color: #800000;
+    color: white;
+}
+
+.btn:hover {
+    color: lightgray;
+}
+
+#counter-text {
+    font-size: 3em;
+    margin-top: 50px;
+}
