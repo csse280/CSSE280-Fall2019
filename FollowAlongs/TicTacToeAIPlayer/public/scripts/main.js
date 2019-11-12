@@ -56,10 +56,10 @@ rh.Game = class {
 		// Controller is telling the Model to make a change
 		if (this.state == rh.Game.State.X_WIN || this.state == rh.Game.State.O_WIN ||
 			this.state == rh.Game.State.TIE) {
-			return;  // Do nothing since the game has already been won.
+			return; // Do nothing since the game has already been won.
 		}
 		if (this.board[buttonIndex] != rh.Game.Mark.NONE) {
-			return;  // Square is not empty
+			return; // Square is not empty
 		}
 		if (this.state == rh.Game.State.X_TURN) {
 			// If X_TURN, make a mark for X and
@@ -146,10 +146,23 @@ rh.PageController = class {
 		// Send an AJAX GET request to our API (/api/getmove/:board)
 		// Use the response to make a move 
 
-		console.log('this.game.isAiTurn :', this.game.isAiTurn);
-		console.log('this.game.boardString :', this.game.boardString);
+		// console.log('this.game.isAiTurn :', this.game.isAiTurn);
+		// console.log('this.game.boardString :', this.game.boardString);
 
-
+		if (this.game.isAiTurn) {
+			console.log("Make an Ajax request");
+			$.ajax({
+				type: "GET",
+				url: `/api/getmove/${this.game.boardString}`,
+				contentType: "application/json"
+			}).done((data) => {
+				console.log("Received:", data);
+				this.game.pressedButtonAtIndex(data.move);
+				this.updateView();
+			}).fail((jqXHR) => {
+				console.log("An error occurred.");
+			});
+		}
 	}
 }
 
