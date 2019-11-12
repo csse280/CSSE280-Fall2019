@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="styles/bootstrap.min.css">
+  <link rel="stylesheet" href="styles/main.css">
+  <title>Tic-Tac-Toe</title>
+</head>
+
+<body>
+  <nav class="navbar fixed-top">
+    Tic-Tac-Toe
+  </nav>
+  <div id="main-page" class="container page-container">
+    <h1 id="game-state-text">X's Turn</h1>
+    <div id="game-board" class="mx-auto">
+      <div data-id="0" class="square borderright borderbottom"></div>
+      <div data-id="1" class="square borderright borderleft borderbottom"></div>
+      <div data-id="2" class="square borderleft borderbottom"></div>
+      <div data-id="3" class="square bordertop borderright borderbottom"></div>
+      <div data-id="4" class="square bordertop borderright borderleft borderbottom"></div>
+      <div data-id="5" class="square bordertop borderleft borderbottom"></div>
+      <div data-id="6" class="square bordertop borderright"></div>
+      <div data-id="7" class="square bordertop borderright borderleft"></div>
+      <div data-id="8" class="square bordertop borderleft"></div>
+      <button id="new-game-button" class="ml-auto btn btn-dark">New Game</button>
+    </div>
+
+    <!-- The Bootstrap way to do layout -->
+    <!-- <div class="row justify-content-center">
+      <div id="game-board" class="col-10 col-md-6">
+        <div class="row">
+          <div id="button0" class="square borderright borderbottom col">X</div>
+          <div id="button1" class="square borderright borderleft borderbottom col">X</div>
+          <div id="button2" class="square borderleft borderbottom col">X</div>
+        </div>
+        <div class="row">
+          <div id="button3" class="square bordertop borderright borderbottom col">X</div>
+          <div id="button4" class="square bordertop borderright borderleft borderbottom col">X</div>
+          <div id="button5" class="square bordertop borderleft borderbottom col">X</div>
+        </div>
+        <div class="row">
+          <div id="button6" class="square bordertop borderright col">X</div>
+          <div id="button7" class="square bordertop borderright borderleft col">X</div>
+          <div id="button8" class="square bordertop borderleft col">X</div>
+        </div>
+        <div class="row">
+          <button id="new-game-button" class="ml-auto btn btn-dark">New Game</button>
+        </div>
+      </div>
+    </div> -->
+  </div>
+  <script src="scripts/jquery.min.js"></script>
+  <script src="scripts/popper.min.js"></script>
+  <script src="scripts/bootstrap.min.js"></script>
+  <script src="scripts/main.js"></script>
+</body>
+
+</html>
