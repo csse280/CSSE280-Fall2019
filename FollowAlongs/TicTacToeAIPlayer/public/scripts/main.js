@@ -36,6 +36,22 @@ rh.Game = class {
 		this.state = rh.Game.State.X_TURN; // Enums object X_TURN, O_TURN, X_WIN, O_WIN, TIE_GAME
 	}
 
+	get isAiTurn() {
+		return this.state == rh.Game.State.O_TURN;
+	}
+
+	get boardString() {
+		let boardString = "";
+		for (let mark of this.board) {
+			if (mark == rh.Game.Mark.NONE) {
+				boardString += "-";
+			} else {
+				boardString += mark;
+			}
+		}
+		return boardString;
+	}
+
 	pressedButtonAtIndex(buttonIndex) {
 		// Controller is telling the Model to make a change
 		if (this.state == rh.Game.State.X_WIN || this.state == rh.Game.State.O_WIN ||
@@ -124,6 +140,16 @@ rh.PageController = class {
 		$(".square").each((index, item) => {
 			$(item).html(this.game.getMarkAtIndex(index));
 		});
+
+		// TODO: Check if the current is O_TURN
+		// Get the board string
+		// Send an AJAX GET request to our API (/api/getmove/:board)
+		// Use the response to make a move 
+
+		console.log('this.game.isAiTurn :', this.game.isAiTurn);
+		console.log('this.game.boardString :', this.game.boardString);
+
+
 	}
 }
 
