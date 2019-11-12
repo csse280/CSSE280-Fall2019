@@ -154,7 +154,7 @@ rh.PageController = class {
 			$.ajax({
 				type: "GET",
 				//url: `/api/getmove/${this.game.boardString}`,
-				url: `http://localhost:5001/fisherds-ttt-ai-player/us-central1/api/getmove/${this.game.boardString}`,
+				url: `https://us-central1-fisherds-ttt-ai-player.cloudfunctions.net/api/getmove/${this.game.boardString}`,
 				
 
 				contentType: "application/json"
